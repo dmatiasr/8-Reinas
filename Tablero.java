@@ -32,9 +32,41 @@ public class Tablero {
      */
     public boolean hayAmenaza() {
         //TAREA: implemente esta funcion para que devuelva true si existe al menos una reina en el tablero que amenaza a otra.
-               
+        boolean amenaza = false;
+        //CONTROLAR POR COLUMNA SI HAY MAS DE DOS O MAS REINAS
+        for (int col=0; col<columna;col++){
+            int reinas=0;
+            for(int fil=0;fil<fila && reinas<2;fil++){
+                if (tab[fil][col]=='R'){
+                    reinas=reinas+1;
+                }
+            }
+            if (reinas>1){ //hay dos reynas entonces hay amenaza
+                amenaza=true;
+                col=columna; //para que termine la busqueda y salga del ciclo de columnas        
+                return amenaza;
+            }
+        }
+        //CONTROLAR POR FILAS SI HAY MAS DE DOS REINAS     
+        for (int fil=0; fil<fila;fil++){
+            int reinas=0;
+            for(int col=0;col<columna && reinas<2;col++){
+                if (tab[fil][col]=='R'){
+                    reinas=reinas+1;
+                }
+            }
+            if (reinas>1){ //hay dos reynas entonces hay amenaza
+                amenaza=true;
+                fil=fila; //para que termine la busqueda y salga del ciclo de filas        
+                return amenaza;
+            }
+        }
+        //CONTROLAR POR DIAGONALES (Asc,Des)(izq a derecha)
+        //DIAGONAL ASCENDENTE 
+        //DIAGONAL DESCENDENTE
 
-        throw new UnsupportedOperationException("Tablero#hayAmenaza() : no implementado");
+        return amenaza;
+        //throw new UnsupportedOperationException("Tablero#hayAmenaza() : no implementado");
 
     }
     

@@ -3,7 +3,7 @@
  * 
 */
 public class Tablero {
-    private int[][] tab;
+    private char[][] tab;
     private int columna;
     private int fila;
     
@@ -13,12 +13,12 @@ public class Tablero {
     public Tablero() {
         columna=8;
         fila=8;
-        tab = new int[fila][columna];
+        tab = new char[fila][columna];
         //Cargar el tablero aletoriamente con 8 fichas de reinas. 
         //(1,2,3,4,5,6,7,8) : cada uno representa a una reina diferente.
         for (int fila=0; fila < tab.length; fila++) {
             for (int col=0; col < tab[fila].length; col++) {
-                tab[fila][col] = 0;//inicializa el tablero el cero
+                tab[fila][col] = ' ';//inicializa el tablero con un char vacio
                 //(int) (Math.random()*7+1); //carga 8 posiciones random
             }
         }
@@ -67,8 +67,13 @@ public class Tablero {
             
         //throw new UnsupportedOperationException("Tablero#ocupado(int, int) : no implementado");
         //VER SI ESTA FUERA DE RANGO !!!
-        
-        return (tab[fila][columna] ==0);
+        if (columna < 0 || columna > 7  ){
+            throw new IllegalArgumentException ("ERROR:Tablero.ocupado : Columna incorrecta");
+        }
+        if (fila < 0 || fila > 7){
+            throw new IllegalArgumentException ("ERROR:Tablero.ocupado : Fila incorrecta");   
+        }
+        return (tab[fila][columna] == 'R'); //Si es igual a char R, la celda esta ocupada.
           
     }
     
@@ -108,7 +113,8 @@ public class Tablero {
         //  5        |   |   | R |   |   |   |   |   |
         //  6        |   |   | R |   |   |   |   |   |
         //  7        |   |   |   |   |   |   | R |   |
-        throw new UnsupportedOperationException("Tablero#mover(int, int, int, int) : no implementado");
+        //throw new UnsupportedOperationException("Tablero#mover(int, int, int, int) : no implementado");
+        
     }
     
     /**
@@ -122,7 +128,13 @@ public class Tablero {
         //          Si ya existe una reina en esa casilla o si la columna y la fila no estan dentro de los valores (0, 7),
         //          el metodo debe retornar una excepcion (IllegalArgumentException).
         //throw new UnsupportedOperationException("Tablero#colocarReina(int, int) : no implementado");
-             
+        //La clase de control de cantidad de reinas se hace desde afuera.
+        if (!ocupado(columna,fila)){
+            tab[fila][columna] = 'R';
+        }
+        else{
+            throw new IllegalArgumentException ("ERROR:Tablero.colocarReina: CELDA OCUPADA");    
+        }
     }
     
     /**
@@ -131,7 +143,7 @@ public class Tablero {
     public void limpiarTablero() {
         //TAREA:    implemente esta funcion para que limpie el tablero (ninguna casilla debe quedar ocupada)
         //throw new UnsupportedOperationException("Tablero#limpiarTablero() : no implementado");
-        tab=new int[fila][columna];
+        tab=new char[fila][columna];
     }
     
     @Override

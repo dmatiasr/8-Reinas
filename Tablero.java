@@ -18,7 +18,8 @@ public class Tablero {
         //(1,2,3,4,5,6,7,8) : cada uno representa a una reina diferente.
         for (int fila=0; fila < tab.length; fila++) {
             for (int col=0; col < tab[fila].length; col++) {
-                tab[fila][col] = (int) (Math.random()*7+1); //carga 8 posiciones random
+                tab[fila][col] = 0;//inicializa el tablero el cero
+                //(int) (Math.random()*7+1); //carga 8 posiciones random
             }
         }
         

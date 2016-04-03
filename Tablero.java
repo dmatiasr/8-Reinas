@@ -64,7 +64,12 @@ public class Tablero {
         //          ocupado(2,6) == true
         //          ocupado(6,7) == true
         //          ocupado(7,6) == false
-        throw new UnsupportedOperationException("Tablero#ocupado(int, int) : no implementado");
+            
+        //throw new UnsupportedOperationException("Tablero#ocupado(int, int) : no implementado");
+        //VER SI ESTA FUERA DE RANGO !!!
+        
+        return (tab[fila][columna] ==0);
+          
     }
     
     /**
@@ -116,7 +121,8 @@ public class Tablero {
         //TAREA:    implemente esta funcion para que coloque una reina en la columna y fila especificada.
         //          Si ya existe una reina en esa casilla o si la columna y la fila no estan dentro de los valores (0, 7),
         //          el metodo debe retornar una excepcion (IllegalArgumentException).
-        throw new UnsupportedOperationException("Tablero#colocarReina(int, int) : no implementado");
+        //throw new UnsupportedOperationException("Tablero#colocarReina(int, int) : no implementado");
+             
     }
     
     /**
@@ -124,7 +130,8 @@ public class Tablero {
     */
     public void limpiarTablero() {
         //TAREA:    implemente esta funcion para que limpie el tablero (ninguna casilla debe quedar ocupada)
-        throw new UnsupportedOperationException("Tablero#limpiarTablero() : no implementado");
+        //throw new UnsupportedOperationException("Tablero#limpiarTablero() : no implementado");
+        tab=new int[fila][columna];
     }
     
     @Override

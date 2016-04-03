@@ -32,7 +32,7 @@ public class Tablero {
      */
     public boolean hayAmenaza() {
         //TAREA: implemente esta funcion para que devuelva true si existe al menos una reina en el tablero que amenaza a otra.
-        
+               
 
         throw new UnsupportedOperationException("Tablero#hayAmenaza() : no implementado");
 
@@ -114,7 +114,18 @@ public class Tablero {
         //  6        |   |   | R |   |   |   |   |   |
         //  7        |   |   |   |   |   |   | R |   |
         //throw new UnsupportedOperationException("Tablero#mover(int, int, int, int) : no implementado");
-        
+        //Si no hay ninguna reina en la celda que se quiere mover.
+        if (!ocupado(columnaOrigen,filaOrigen)){
+            throw new IllegalArgumentException("ERROR: Tablero.mover : En la celda no hay ninguna Reina");
+        }
+        //Si la celda destino ya se encuentra ocupada.
+        if (ocupado(columnaDestino,filaDestino)){
+            throw new IllegalArgumentException("ERROR: Tablero.mover : La celda ya se encuentra ocupada por una Reina");    
+        }
+        //Muevo la reina al destino
+        tab[filaDestino][columnaDestino]= tab[filaOrigen][columnaOrigen];
+        //libero la celda con char espacio en blanco.
+        tab[filaOrigen][columnaOrigen]= ' ';
     }
     
     /**

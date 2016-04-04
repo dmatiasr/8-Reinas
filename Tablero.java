@@ -14,14 +14,25 @@ public class Tablero {
         columna=8;
         fila=8;
         tab = new char[fila][columna];
+        int cantReinas=0;
         //Cargar el tablero aletoriamente con 8 fichas de reinas. 
         //(1,2,3,4,5,6,7,8) : cada uno representa a una reina diferente.
         for (int fila=0; fila < tab.length; fila++) {
             for (int col=0; col < tab[fila].length; col++) {
-                tab[fila][col] = ' ';//inicializa el tablero con un char vacio
+                double valorDado = Math.floor(Math.random()*(5-0)+0);
+                if(cantReinas!=8 && valorDado==1){
+                    colocarReina(col,fila);
+                    cantReinas++;
+                }else if(fila==7 && cantReinas<8){
+                    colocarReina(col,fila);
+                    cantReinas++;
+                }else{
+                    tab[fila][col] = ' ';//inicializa el tablero con un char vacio
+                }
                 //(int) (Math.random()*7+1); //carga 8 posiciones random
             }
         }
+        
         
         //TAREA: el constructor debe crear un nuevo tablero
         //la configuracion del tablero debe cumplir con que haya 8 reinas en el tablero (las posiciones de las mismas no estan restringidas)
@@ -60,6 +71,48 @@ public class Tablero {
                 fil=fila; //para que termine la busqueda y salga del ciclo de filas        
                 return amenaza;
             }
+        }
+        // CONTROL POR DIAGONALES ASCENDENTE
+        int reinas=0;
+        int fil=1;
+        while(fil<fila){
+            int x=0;
+            int i=0;
+            int j=fil;
+            while(x<=j+i && reinas<2){
+                if(ocupado(i,j)){
+                    reinas++;
+                }
+                j--;
+                i++;
+                x++;
+            }
+            if(reinas>1){
+                amenaza = true;
+                return amenaza;
+            }
+            fil++;
+            reinas=0;
+        }
+        fil=1;
+        while(fil<fila-1){
+            int x=0;
+            int i=7;
+            int j=fil;
+            while(x>=j-i){
+                if(ocupado(j,i)){
+                    reinas++;
+                }
+                j++;
+                i--;
+                x++;
+            }
+            if(reinas>1){
+                amenaza=true;
+                return amenaza;
+            }
+            fil++;
+            reinas=0;
         }
         //CONTROLAR POR DIAGONALES (Asc,Des)(izq a derecha)
         //DIAGONAL ASCENDENTE 

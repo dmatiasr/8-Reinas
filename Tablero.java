@@ -115,9 +115,35 @@ public class Tablero {
             reinas=0;
         }
         //CONTROLAR POR DIAGONALES (Asc,Des)(izq a derecha)
-        //DIAGONAL ASCENDENTE 
         //DIAGONAL DESCENDENTE
+        //cae de (0,0) para ---->>>
+        //diagonales de abajo, diagonal por diagonal.
+        for (int f=0; f < fila ; f++){
+            reinas=0;
+            for (int i=f, j=0; i<fila && j<columna; i++,j++){ //va diagonal por diagonal formando cada una de forma escalonada.
+                if (tab[i][j]=='R'){
+                    reinas++;
+                }
+            }
+            if (reinas>1){
+                amenaza=true;
+                return amenaza;
+            }
+        }  
+        //Diagonal por encima de la diagonal principal       
+        for(int j=1; j<columna;j++){ //no analiza la diagonal principal. ya observada en el ciclo compuesto anterior.
+            reinas=0;
+            for (int i=0; i+j<7;i++){
+                if (tab[i][i+j]=='R'){
+                    reinas++;
+                }
+            }
+            if (reinas>1){
+                amenaza=true;
+                return amenaza;
+            }
 
+        }
         return amenaza;
         //throw new UnsupportedOperationException("Tablero#hayAmenaza() : no implementado");
 
